@@ -94,7 +94,7 @@ class Checklists extends Component {
                       value={checklist.id}
                       onClick={(e) => this.handleDeleteChecklist(e)}
                     >
-                      Delete
+                      Delete checklist
                     </Button>
                   </Card.Header>
                   <Card.Body>
