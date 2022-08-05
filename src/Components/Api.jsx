@@ -5,7 +5,7 @@ axios.defaults.params = {
   token: "eeb95696b6767d662d2c7a03c28c75d2cd71d79203789d1c3d6cd6d6530345a0",
 };
 
-axios.defaults.baseURL("https://api.trello.com");
+axios.defaults.baseURL= "https://api.trello.com";
 
 function getBoards() {
   return axios

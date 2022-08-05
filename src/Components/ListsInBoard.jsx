@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
-import CardsInList from "./CardsInList";
+import CardsInList from "./CardsInLists";
 import * as TrelloApi from "./Api";
 
 class List extends Component {

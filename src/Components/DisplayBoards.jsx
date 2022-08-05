@@ -29,7 +29,7 @@ class DisplayBoards extends Component {
     });
   };
 
-  handleCreateBoard = (e) => {
+  handleCreateBoard = () => {
     if(this.state.boardTitle){
     this.createBoard();}
   };

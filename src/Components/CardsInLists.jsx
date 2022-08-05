@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 
 import * as TrelloApi from "./Api";
+import Checklists from "./Checklists";
 
 class CardsInList extends Component {
   state = {
@@ -56,9 +57,7 @@ class CardsInList extends Component {
             <div key={card.id} className="card-container">
               <h3>{card.name}</h3>
               <div className="buttons">
-                <Button variant="primary" size="sm" type="button">
-                  View Card
-                </Button>
+              <Checklists key={card.id} card = {card}/>
                 <Button
                   onClick={(e) => this.handleDelete(e)}
                   value={card.id}

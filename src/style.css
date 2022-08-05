@@ -100,3 +100,11 @@
   padding: 0.65rem;
   margin: 0.8rem;
 }
+
+.mb-1{
+  width: 50%;
+}/* 
+.card-header{
+  display: flex;
+  justify-content: space-around;
+} */
