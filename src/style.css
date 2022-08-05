@@ -23,46 +23,80 @@
   height: 8em;
   background-color: #026aa7;
   color: white;
-  padding: 1em 2em;
-  margin: 0.36em;
-  border-radius: 0.6em;
+  padding: 1rem 2rem;
+  margin: 0.36rem;
+  border-radius: 0.6rem;
 }
 
-.trello-create-board-main-container {
-  width: 100vw;
-  height: 92vh;
-  position: fixed;
-  background-color: rgba(0, 0, 0, 0.7);
-}
 .create-board {
   background-color: white;
-  padding: 1.5em;
+  padding: 1.5rem;
 }
 
 .create-board-buttons {
-  margin-top: 2em;
+  margin-top: 2rem;
 }
 
 .create-board-close-button {
-  margin-right: 1em;
+  margin-right: 1rem;
 }
 
 .boards-container {
   width: 100vw;
   height: 92vh;
-  padding: 3em;
+  padding: 3rem;
 }
 
 .boards-create-board {
-  width: 12em;
-  height: 8em;
+  width: 12rem;
+  height: 8rem;
 
   background-color: lightgrey;
-  border-radius: 0.6em;
+  border-radius: 0.6rem;
 
-  margin: 0.2em;
+  margin: 0.2rem;
 }
 
 .remove-text-decoration {
   text-decoration: none;
+}
+
+.list-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 2rem;
+  gap: 2rem;
+}
+/* 
+.lists {
+  width: 12rem;
+  height: 8rem;
+  margin: "1rem";
+  min-width: "350px";
+} */
+
+.main-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  border: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: lightgray;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  padding: 1rem;
+}
+
+.add-card {
+  padding: 0.65rem;
+  margin: 0.8rem;
 }

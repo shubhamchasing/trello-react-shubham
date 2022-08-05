@@ -2,24 +2,19 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./style.css";
-
 import NavBar from "./Components/NavBar";
 import DisplayBoards from "./Components/DisplayBoards";
-import Board from "./Components/Board";
-
+import List from "./Components/ListsInBoard";
+import PageNotFound from "./Components/PageNotFound";
 class App extends Component {
   render() {
     return (
       <Router>
+        <NavBar />
         <Switch>
-          <Route exact path="/boards">
-            <>
-              <NavBar />
-              <DisplayBoards />
-            </>
-          </Route>
-          <Route path="/boards/:boardId" component={Board} />
-          <Route path="*" component={<p>Page Not Found!</p>} />
+          <Route exact path="/boards" component={DisplayBoards}></Route>
+          <Route path="/boards/:boardId" component={List } />
+          <Route path="*" component={PageNotFound}/>
         </Switch>
       </Router>
     );

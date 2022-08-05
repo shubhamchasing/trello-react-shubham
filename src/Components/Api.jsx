@@ -5,63 +5,108 @@ axios.defaults.params = {
   token: "eeb95696b6767d662d2c7a03c28c75d2cd71d79203789d1c3d6cd6d6530345a0",
 };
 
+axios.defaults.baseURL("https://api.trello.com");
+
 function getBoards() {
   return axios
-    .get("https://api.trello.com/1/members/me/boards")
+    .get("/1/members/me/boards")
     .then((res) => res.data)
     .catch((err) => console.error(err));
 }
 
 function createBoard(name) {
-  return axios.post("https://api.trello.com/1/boards", null, {
-    params: {
-      name,
-    },
-  });
+  return axios
+    .post("/1/boards", null, {
+      params: {
+        name,
+      },
+    })
+    .then((res) => res.data)
+    .catch((err) => console.error(err));
 }
 
 function getLists(id) {
   return axios
-    .get(`https://api.trello.com/1/boards${id}/lists`)
-    .then((res) => res.data)
+    .get(`/1/boards/${id}/lists`)
+    .then((res) => {
+      return res.data;
+    })
     .catch((err) => console.error(err));
 }
 
 function addList(name, idBoard) {
-  return axios.post("https://api.trello.com/1/lists", null, {
-    params: {
-      name,
-      idBoard,
-    },
-  });
-}
-
-function archiveList(id) {
-  return axios.put(`https://api.trello.com/1/lists/${id}/closed`, {
-    params: {
-      value: true,
-    },
-  });
-}
-
-function displayCards(id) {
   return axios
-    .get(`https://api.trello.com/1/lists/${id}/cards`)
+    .post("/1/lists", null, {
+      params: {
+        name,
+        idBoard,
+      },
+    })
     .then((res) => res.data)
     .catch((err) => console.error(err));
 }
 
-function createCard(name, idList) {
-  return axios.post("https://api.trello.com/1/lists", null, {
-    params: {
-      name,
-      idList,
-    },
-  });
+function archiveList(id) {
+  return axios
+    .put(`/1/lists/${id}/closed`, null, {
+      params: {
+        value: true,
+      },
+    })
+    .then((res) => res.data)
+    .catch((err) => console.error(err));
+}
+
+function getCards(id) {
+  return axios
+    .get(`/1/lists/${id}/cards`)
+    .then((res) => res.data)
+    .catch((err) => console.error(err));
+}
+
+function addCard(name, idList) {
+  return axios
+    .post("/1/cards", null, {
+      params: {
+        name,
+        idList,
+      },
+    })
+    .then((res) => res.data)
+    .catch((err) => console.error(err));
 }
 
 function deleteCard(id) {
-  return axios.delete(`https://api.trello.com/1/cards/${id}`);
+  return axios
+    .delete(`/1/cards/${id}`)
+    .then((res) => res.data)
+    .catch((err) => console.error(err));
+}
+
+function getChecklists(id) {
+  return axios
+    .get(`/1/cards/${id}/checklists`)
+    .then((res) => res.data)
+    .catch((err) => console.error(err));
+}
+
+function addChecklist(name, idCard) {
+  return axios
+    .post(`/1/checklists`, null, {
+      params: {
+        name,
+        idCard,
+      },
+    })
+    .then((res) => res.data)
+    .catch((err) => console.error(err));
+}
+
+function deleteChecklist(id) {
+  return axios
+    .delete(`/1/checklists/${id}`)
+    .then((res) => res.data)
+    .catch((err) => console.error(err));
 }
 
 export {
@@ -70,7 +115,10 @@ export {
   getLists,
   addList,
   archiveList,
-  displayCards,
-  createCard,
+  getCards,
+  addCard,
   deleteCard,
+  getChecklists,
+  addChecklist,
+  deleteChecklist
 };

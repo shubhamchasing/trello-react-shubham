@@ -15,7 +15,7 @@ class DisplayBoards extends Component {
 
   handleBoardTitle = (e) => {
     this.setState({
-      boardTitle: e.tatget.value,
+      boardTitle: e.target.value,
     });
   };
 
@@ -30,8 +30,8 @@ class DisplayBoards extends Component {
   };
 
   handleCreateBoard = (e) => {
-    e.preventDefault();
-    this.createBoard();
+    if(this.state.boardTitle){
+    this.createBoard();}
   };
 
   handleOnClickForm = () => {
@@ -61,9 +61,11 @@ class DisplayBoards extends Component {
               id="boardTitleInputElement"
               className="col-12 form-control mt-2"
               placeholder="Enter board title"
+              required
             />
             <div className="create-board-buttons d-flex justify-content-end">
               <button
+                type="button"
                 onClick={this.handleModal}
                 className="create-board-close-button btn btn-secondary btn-sm"
               >
@@ -83,7 +85,7 @@ class DisplayBoards extends Component {
             </div>
 
             {this.state.boards.map((board) => {
-             return (<Board key={board.id} board={board} />);
+              return <Board key={board.id} board={board} />;
             })}
             <div
               onClick={this.handleOnClickForm}
@@ -93,7 +95,7 @@ class DisplayBoards extends Component {
                   : "d-none"
               }
             >
-              <p>Create new board</p>
+              Create new board
             </div>
           </div>
         </div>
