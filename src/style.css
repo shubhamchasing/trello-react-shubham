@@ -103,7 +103,18 @@
 
 .mb-1{
   width: 50%;
-}/* 
+}
+
+.item-container{
+  display: flex;
+  margin: 1rem;
+  gap: 1rem;
+}
+
+
+/* 
+
+
 .card-header{
   display: flex;
   justify-content: space-around;

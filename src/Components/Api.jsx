@@ -5,7 +5,7 @@ axios.defaults.params = {
   token: "eeb95696b6767d662d2c7a03c28c75d2cd71d79203789d1c3d6cd6d6530345a0",
 };
 
-axios.defaults.baseURL= "https://api.trello.com";
+axios.defaults.baseURL = "https://api.trello.com";
 
 function getBoards() {
   return axios
@@ -109,6 +109,44 @@ function deleteChecklist(id) {
     .catch((err) => console.error(err));
 }
 
+function getCheckitems(id) {
+  return axios
+    .get(`/1/checklists/${id}/checkItems`)
+    .then((res) => res.data)
+    .catch((err) => console.error(err));
+}
+
+function addCheckitem(name, id) {
+  return axios
+    .post(`/1/checklists/${id}/checkItems`, null, {
+      params: {
+        name,
+      },
+    })
+    .then((res) => res.data)
+    .catch((err) => console.error(err));
+}
+
+function deleteCheckitem(id, idCheckItem) {
+  return axios
+    .delete(`/1/checklists/${id}/checkItems/${idCheckItem}`)
+    .then((res) => res.data)
+    .catch((err) => console.error(err));
+}
+
+function updateCheckitem(idCard,idCheckItem,state) {
+  return axios
+    .put(
+      `/1/cards/${idCard}/checkItem/${idCheckItem}`,null,{
+        params: {
+          state
+        }
+      }
+    )
+    .then((res) => res.data)
+    .catch((err) => console.error(err))
+}
+
 export {
   getBoards,
   createBoard,
@@ -120,5 +158,9 @@ export {
   deleteCard,
   getChecklists,
   addChecklist,
-  deleteChecklist
+  deleteChecklist,
+  getCheckitems,
+  addCheckitem,
+  deleteCheckitem,
+  updateCheckitem
 };

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Card, Button, Modal, Form, InputGroup } from "react-bootstrap";
 
 import * as TrelloApi from "./Api";
+import Checkitems from "./Checkitems";
 
 class Checklists extends Component {
   state = { modal: false, checklists: [], checklistName: "" };
@@ -70,7 +71,7 @@ class Checklists extends Component {
                 placeholder="Add new checklist"
                 aria-label="Add new checklist"
                 aria-describedby="basic-addon2"
-                onChange={this.handleChange}
+                onChange={(e) => this.handleChange(e)}
                 value={this.state.checklistName}
                 required
               />
@@ -89,7 +90,7 @@ class Checklists extends Component {
                   <Card.Header className="card-header">
                     {checklist.name}
                     <Button
-                      variant="danger"
+                      variant="secondary"
                       type="button"
                       value={checklist.id}
                       onClick={(e) => this.handleDeleteChecklist(e)}
@@ -97,9 +98,7 @@ class Checklists extends Component {
                       Delete checklist
                     </Button>
                   </Card.Header>
-                  <Card.Body>
-                    <Button variant="primary">Add Checkitems</Button>
-                  </Card.Body>
+                 <Checkitems checklistId = {checklist.id} cardId ={this.cardId}/>
                 </Card>
               );
             })}
@@ -117,3 +116,7 @@ export default Checklists;
 <h5>{checklist.name}</h5>
 <Button variant="secondary" id="button-addon2">Delete</Button>
 </div> */
+/* 
+<Card.Body>
+<Button variant="light">Add an item</Button>
+</Card.Body> */
