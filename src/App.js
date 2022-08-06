@@ -12,8 +12,8 @@ class App extends Component {
       <Router>
         <NavBar />
         <Switch>
-          <Route exact path="/boards" component={DisplayBoards}></Route>
-          <Route path="/boards/:boardId" component={List } />
+          <Route exact path="/" component={DisplayBoards}></Route>
+          <Route path="/:boardId" component={List } />
           <Route path="*" component={PageNotFound}/>
         </Switch>
       </Router>

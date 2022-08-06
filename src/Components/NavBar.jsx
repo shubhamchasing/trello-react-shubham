@@ -14,7 +14,7 @@ function NavBar() {
           }
           alt=""
         />
-        <Link className="navbar-home" to="/boards">
+        <Link className="navbar-home" to="/">
           Home
         </Link>
 

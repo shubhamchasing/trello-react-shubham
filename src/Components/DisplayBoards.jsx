@@ -29,9 +29,12 @@ class DisplayBoards extends Component {
     });
   };
 
-  handleCreateBoard = () => {
+  handleCreateBoard = (e) => {
+   
     if(this.state.boardTitle){
-    this.createBoard();}
+    this.createBoard();
+    e.preventdefault()      
+  }
   };
 
   handleOnClickForm = () => {
@@ -48,7 +51,7 @@ class DisplayBoards extends Component {
     return (
       <>
         <Modal show={this.state.modal} onHide={this.handleModal}>
-          <form className="create-board" onSubmit={this.handleCreateBoard}>
+          <form className="create-board" onSubmit={(e)=> this.handleCreateBoard(e)}>
             <h3>Create New Board</h3>
             <hr />
             <label htmlFor="boardTitleInputElement" className="mt-3">
