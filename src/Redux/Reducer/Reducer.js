@@ -13,7 +13,10 @@ export const boardsReducer = (state = intialState, action) => {
       };
       
     case ActionTypes.CREATE_BOARD:
-      return {};
+      return { 
+        ...state,
+        boards : [...state.boards, action.payload]
+      };
 
     default:
       return state;

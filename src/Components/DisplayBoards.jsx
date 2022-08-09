@@ -4,35 +4,30 @@ import { connect } from "react-redux";
 
 import Board from "./Board";
 import * as TrelloApi from "./Api";
-import * as action from "../Redux/ActionCreator/ActionCreator";
+import * as action from "../Redux/ActionCreator/ActionCreator"
 
 const mapStateToProps = (state) => {
-
-  if (state.boards) {
-    return {
-      boards: state.boards,
-    };
-  } else {
-    return {
-      boards: [],
-    };
-  }
+  console.log(state.boards)
+  return {
+    boards: state.boards,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getBoards: (data) => dispatch(action.getBoards(data)),
-  };
+    getBoards : (data) => dispatch( action.getBoards(data) ),
+    createBoard : (data) => dispatch(action.createBoard(data))
+  }
 };
 
 class DisplayBoards extends Component {
-  state = { boards: [], modal: false, boardTitle: "", spinner: true };
+  state = {modal: false, boardTitle: "", spinner: true };
 
   componentDidMount() {
-    console.log("678");
+    console.log("678")
     TrelloApi.getBoards().then((data) => {
-      this.setState({ spinner: false });
-      this.props.getBoards(data);
+      this.setState({spinner: false })
+      this.props.getBoards(data)
     });
   }
 
@@ -45,10 +40,10 @@ class DisplayBoards extends Component {
   createBoard = () => {
     TrelloApi.createBoard(this.state.boardTitle).then((data) => {
       this.setState({
-        boards: [data, ...this.state.boards],
         modal: !this.state.modal,
         boardTitle: "",
       });
+      this.props.createBoard(data)
     });
   };
 
@@ -125,4 +120,4 @@ class DisplayBoards extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DisplayBoards);
+export default connect(mapStateToProps,mapDispatchToProps)(DisplayBoards);
