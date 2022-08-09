@@ -1,15 +1,38 @@
 import React, { Component } from "react";
 import { Modal, Spinner } from "react-bootstrap";
+import { connect } from "react-redux";
 
 import Board from "./Board";
 import * as TrelloApi from "./Api";
+import * as action from "../Redux/ActionCreator/ActionCreator";
+
+const mapStateToProps = (state) => {
+
+  if (state.boards) {
+    return {
+      boards: state.boards,
+    };
+  } else {
+    return {
+      boards: [],
+    };
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getBoards: (data) => dispatch(action.getBoards(data)),
+  };
+};
 
 class DisplayBoards extends Component {
   state = { boards: [], modal: false, boardTitle: "", spinner: true };
 
   componentDidMount() {
+    console.log("678");
     TrelloApi.getBoards().then((data) => {
-      this.setState({ boards: data, spinner: false });
+      this.setState({ spinner: false });
+      this.props.getBoards(data);
     });
   }
 
@@ -30,22 +53,23 @@ class DisplayBoards extends Component {
   };
 
   handleCreateBoard = (e) => {
-   
-    if(this.state.boardTitle){
-    this.createBoard();
-  }
+    if (this.state.boardTitle) {
+      this.createBoard();
+    }
   };
 
-
   handleModal = () => {
-    this.setState({modal: !this.state.modal });
+    this.setState({ modal: !this.state.modal });
   };
 
   render() {
     return (
       <>
         <Modal show={this.state.modal} onHide={this.handleModal}>
-          <form className="create-board" onClick={(e)=> this.handleCreateBoard(e)}>
+          <form
+            className="create-board"
+            onClick={(e) => this.handleCreateBoard(e)}
+          >
             <h3>Create New Board</h3>
             <hr />
             <label htmlFor="boardTitleInputElement" className="mt-3">
@@ -81,7 +105,7 @@ class DisplayBoards extends Component {
               <Spinner animation="border" />
             </div>
 
-            {this.state.boards.map((board) => {
+            {this.props.boards.map((board) => {
               return <Board key={board.id} board={board} />;
             })}
             <div
@@ -101,4 +125,4 @@ class DisplayBoards extends Component {
   }
 }
 
-export default DisplayBoards;
+export default connect(mapStateToProps, mapDispatchToProps)(DisplayBoards);
