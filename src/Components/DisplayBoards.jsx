@@ -33,25 +33,19 @@ class DisplayBoards extends Component {
    
     if(this.state.boardTitle){
     this.createBoard();
-    e.preventdefault()      
   }
   };
 
-  handleOnClickForm = () => {
-    this.setState({
-      modal: !this.state.modal,
-    });
-  };
 
   handleModal = () => {
-    this.setState({ boardTitle: "", modal: !this.state.modal });
+    this.setState({modal: !this.state.modal });
   };
 
   render() {
     return (
       <>
         <Modal show={this.state.modal} onHide={this.handleModal}>
-          <form className="create-board" onSubmit={(e)=> this.handleCreateBoard(e)}>
+          <form className="create-board" onClick={(e)=> this.handleCreateBoard(e)}>
             <h3>Create New Board</h3>
             <hr />
             <label htmlFor="boardTitleInputElement" className="mt-3">
@@ -74,7 +68,7 @@ class DisplayBoards extends Component {
               >
                 Close
               </button>
-              <button type="submit" className="btn btn-primary btn-sm col-4">
+              <button type="button" className="btn btn-primary btn-sm col-4">
                 Add Board
               </button>
             </div>
@@ -91,7 +85,7 @@ class DisplayBoards extends Component {
               return <Board key={board.id} board={board} />;
             })}
             <div
-              onClick={this.handleOnClickForm}
+              onClick={this.handleModal}
               className={
                 !this.state.spinner
                   ? "boards-create-board d-flex flex-column justify-content-center align-items-center"
