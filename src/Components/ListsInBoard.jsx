@@ -1,34 +1,49 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
 import CardsInList from "./CardsInLists";
 import * as TrelloApi from "./Api";
+import * as action from "../Redux/ActionCreator/ActionCreator";
+
+const mapStateToProps = (state) => {
+  return {
+    lists: state.lists,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getLists: (data) => dispatch(action.getLists(data)),
+    addList: (data) => dispatch(action.addList(data)),
+    archiveList: (data) => dispatch(action.archiveList(data))
+  };
+};
 
 class List extends Component {
-  state = { lists: [], listName: "" };
+  state = {  listName: "" };
 
   boardId = this.props.match.params.boardId;
 
   componentDidMount() {
-    TrelloApi.getLists(this.boardId).then((data) =>
-      this.setState({ lists: data })
-    );
+    TrelloApi.getLists(this.boardId).then((data) => this.props.getLists(data));
   }
 
   handleDelete = async (e) => {
-  
     let archiveListId = e.target.value;
     await TrelloApi.archiveList(archiveListId);
-    let filteredLists = this.state.lists.filter((list) => {
+    let filteredLists = this.props.lists.filter((list) => {
       if (list.id !== archiveListId) {
         return true;
       }
+      else{
+        return false;
+      }
     });
-    this.setState({
-      lists: filteredLists,
-    });
+    
+    this.props.archiveList(filteredLists)
   };
 
   handleChange = (e) => {
@@ -39,12 +54,11 @@ class List extends Component {
   handleSubmit = (e) => {
     let listName = this.state.listName;
     if (listName) {
-    
       TrelloApi.addList(listName, this.boardId).then((data) => {
         this.setState({
-          lists: [data, ...this.state.lists],
           listName: "",
         });
+        this.props.addList(data);
       });
     }
   };
@@ -52,7 +66,7 @@ class List extends Component {
   render() {
     return (
       <div className="list-container">
-        {this.state.lists.map((list) => {
+        {this.props.lists.map((list) => {
           return (
             <Card className="lists" key={list.id}>
               <Card.Header as="h5">{list.name}</Card.Header>
@@ -82,7 +96,7 @@ class List extends Component {
               required
             />
             <br />
-            <br/>
+            <br />
             <Button onClick={this.handleSubmit} type="submit">
               Add List
             </Button>
@@ -93,4 +107,4 @@ class List extends Component {
   }
 }
 
-export default List;
+export default connect(mapStateToProps, mapDispatchToProps)(List);

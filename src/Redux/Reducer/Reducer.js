@@ -2,6 +2,7 @@ import { ActionTypes } from "../Actions/Actions";
 
 const intialState = {
   boards: [],
+  lists: [],
 };
 
 export const boardsReducer = (state = intialState, action) => {
@@ -11,12 +12,30 @@ export const boardsReducer = (state = intialState, action) => {
         ...state,
         boards: action.payload,
       };
-      
+
     case ActionTypes.CREATE_BOARD:
-      return { 
+      return {
         ...state,
-        boards : [...state.boards, action.payload]
+        boards: [...state.boards, action.payload],
       };
+
+    case ActionTypes.GET_LIST:
+      return {
+        ...state,
+        lists: action.payload,
+      };
+
+    case ActionTypes.ADD_LIST:
+      return {
+        ...state,
+        lists: [...state.lists, action.payload],
+      };
+
+      case ActionTypes.ARCHIVE_LIST:
+        return {
+          ...state,
+          lists: action.payload,
+        };
 
     default:
       return state;

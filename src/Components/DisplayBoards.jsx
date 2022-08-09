@@ -7,7 +7,6 @@ import * as TrelloApi from "./Api";
 import * as action from "../Redux/ActionCreator/ActionCreator"
 
 const mapStateToProps = (state) => {
-  console.log(state.boards)
   return {
     boards: state.boards,
   };
