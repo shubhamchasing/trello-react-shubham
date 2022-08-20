@@ -6,7 +6,7 @@ import Navbar from "react-bootstrap/Navbar";
 
 function NavBar() {
   return (
-    <Navbar className="navbar">
+    <Navbar className="navbar" size ="sm">
       <Container fluid>
         <img className="trello-logo"
           src={

@@ -16,7 +16,7 @@ export const createBoard = (board) => {
 
 export const getLists = (lists) => {
   return {
-     type: ActionTypes.GET_LIST,
+     type: ActionTypes.GET_LISTS,
       payload: lists
      };
 };
@@ -36,4 +36,4 @@ export const addList = (list) => {
         payload: lists
        };
   };
-  
+   

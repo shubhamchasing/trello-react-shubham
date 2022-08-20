@@ -19,7 +19,7 @@ export const boardsReducer = (state = intialState, action) => {
         boards: [...state.boards, action.payload],
       };
 
-    case ActionTypes.GET_LIST:
+    case ActionTypes.GET_LISTS:
       return {
         ...state,
         lists: action.payload,
@@ -41,3 +41,4 @@ export const boardsReducer = (state = intialState, action) => {
       return state;
   }
 };
+ 

@@ -48,6 +48,9 @@ class Checklists extends Component {
         if (checklistId !== checklist.id) {
           return true;
         }
+        else{
+          return false;
+        }
       });
       this.setState({ checklists: filteredChecklists });
     });
@@ -56,7 +59,8 @@ class Checklists extends Component {
   render() {
     return (
       <>
-        <Button variant="primary" onClick={this.handleViewCard}>
+        <Button variant="primary" onClick={this.handleViewCard}
+         style={{fontSize:"0.5rem", padding:"5px 10px", fontWeight:"900", marginRight:"35%"}} >
           View Card
         </Button>
 

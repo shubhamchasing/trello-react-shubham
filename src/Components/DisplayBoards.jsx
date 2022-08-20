@@ -23,7 +23,6 @@ class DisplayBoards extends Component {
   state = {modal: false, boardTitle: "", spinner: true };
 
   componentDidMount() {
-    console.log("678")
     TrelloApi.getBoards().then((data) => {
       this.setState({spinner: false })
       this.props.getBoards(data)
@@ -60,12 +59,12 @@ class DisplayBoards extends Component {
     return (
       <>
         <Modal show={this.state.modal} onHide={this.handleModal}>
+        <Modal.Header closeButton> <Modal.Title>{"Create New Board"}</Modal.Title>
+          </Modal.Header>
           <form
             className="create-board"
             onClick={(e) => this.handleCreateBoard(e)}
           >
-            <h3>Create New Board</h3>
-            <hr />
             <label htmlFor="boardTitleInputElement" className="mt-3">
               Board title
             </label>

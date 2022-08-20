@@ -40,6 +40,9 @@ class Checkitems extends Component {
         if (checkitemId !== checkitem.id) {
           return true;
         }
+        else{
+          return false;
+        }
       });
       this.setState({ checkitems: filteredCheckitems });
     });
@@ -53,6 +56,9 @@ class Checkitems extends Component {
       let filteredCheckitems = this.state.checkitems.filter((checkitem) => {
         if (checkitemId !== checkitem.id) {
           return true;
+        }
+        else{
+          return false;
         }
       });
       this.setState({ checkitems: [data, ...filteredCheckitems] });

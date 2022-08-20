@@ -67,13 +67,11 @@
   margin: 2rem;
   gap: 2rem;
 }
-/* 
+
 .lists {
-  width: 12rem;
-  height: 8rem;
-  margin: "1rem";
-  min-width: "350px";
-} */
+  margin: 1rem;
+  width: 330px;
+}
 
 .main-container{
     display: flex;
@@ -83,10 +81,10 @@
 .card-container {
   display: flex;
   flex-direction: column;
-  margin-top: 1rem;
-  border: 0.5rem;
+  margin: 1rem;
   border-radius: 0.5rem;
-  background-color: lightgray;
+  background-color: rgba(211, 211, 211, 0.548);
+  padding: 15px;
 }
 
 .buttons {
@@ -97,8 +95,10 @@
 }
 
 .add-card {
-  padding: 0.65rem;
+  padding: 0.25rem;
+  font-size: 0.75rem;
   margin: 0.8rem;
+  width: 80%;
 }
 
 .mb-1{

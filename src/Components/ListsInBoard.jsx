@@ -68,25 +68,23 @@ class List extends Component {
       <div className="list-container">
         {this.props.lists.map((list) => {
           return (
-            <Card className="lists" key={list.id}>
-              <Card.Header as="h5">{list.name}</Card.Header>
-              <CardsInList listId={list.id} />
-              <Card.Body>
-                <br />
-                <Button
+            <Card className="lists" key={list.id} style={{paddingBottom:"20px"}}>
+              <Card.Header style={{display: "flex",justifyContent:"space-between", fontSize:"0.9rem", color:"gray" }}>{list.name} 
+              <Button
                   variant="danger"
                   type="submit"
                   value={list.id}
                   onClick={(e) => this.handleDelete(e)}
+                  style={{fontSize:"0.5rem", padding:"0px 10px", fontWeight:"900"}}
                 >
                   Archive List
-                </Button>
-              </Card.Body>
+                </Button></Card.Header>
+              <CardsInList listId={list.id} />
             </Card>
           );
         })}
         <Card className="add-list">
-          <Card.Header as="h5">{"Add another list"}</Card.Header>
+          <Card.Header >{"Add another list"}</Card.Header>
           <Card.Body>
             <input
               type="text"

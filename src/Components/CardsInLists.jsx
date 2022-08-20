@@ -42,6 +42,9 @@ class CardsInList extends Component {
       if (card.id !== cardId) {
         return true;
       }
+      else{
+        return false;
+      }
     });
     this.setState({
       cards: filteredCards,
@@ -55,15 +58,25 @@ class CardsInList extends Component {
           {" "}
           {this.state.cards.map((card) => (
             <div key={card.id} className="card-container">
-              <h3>{card.name}</h3>
+              <div>
+                <p style={{ fontSize: "0.9rem", fontWeight: "500", marginBottom:"5px"}}>
+                  {card.name}
+                </p>
+                <hr style={{marginTop:"0px"}} />
+              </div>
               <div className="buttons">
-              <Checklists key={card.id} card = {card}/>
+                <Checklists key={card.id} card={card} />
                 <Button
                   onClick={(e) => this.handleDelete(e)}
                   value={card.id}
                   type="button"
                   variant="danger"
                   size="sm"
+                  style={{
+                    fontSize: "0.5rem",
+                    padding: "5px 10px",
+                    fontWeight: "900",
+                  }}
                 >
                   Delete Card
                 </Button>
@@ -79,7 +92,15 @@ class CardsInList extends Component {
               type="text"
               required
             />
-            <Button onClick={(e) => this.handleOnClick(e)} type="button">
+            <Button
+              onClick={(e) => this.handleOnClick(e)}
+              type="button"
+              style={{
+                marginLeft: "15px",
+                fontSize: "0.65rem",
+                fontWeight: "700",
+              }}
+            >
               Add Card
             </Button>
           </div>
