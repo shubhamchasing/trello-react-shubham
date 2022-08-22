@@ -7,12 +7,13 @@ import Card from "react-bootstrap/Card";
 import CardsInList from "./CardsInLists";
 import * as TrelloApi from "./Api";
 import * as action from "../Redux/ActionCreator/ActionCreator";
+//import Delete from "../icons/sign-delete-svgrepo-com.svg";
 
 const mapStateToProps = (state) => {
   return {
     lists: state.lists,
   };
-};
+};   
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -77,7 +78,6 @@ class List extends Component {
                   onClick={(e) => this.handleDelete(e)}
                   style={{fontSize:"0.5rem", padding:"0px 10px", fontWeight:"900"}}
                 >
-                  Archive List
                 </Button></Card.Header>
               <CardsInList listId={list.id} />
             </Card>
