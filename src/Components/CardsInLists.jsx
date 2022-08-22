@@ -93,6 +93,8 @@ class CardsInList extends Component {
               required
             />
             <Button
+            active = {false}
+            variant="outline-secondary"
               onClick={(e) => this.handleOnClick(e)}
               type="button"
               style={{
@@ -101,7 +103,7 @@ class CardsInList extends Component {
                 fontWeight: "700",
               }}
             >
-              Add Card
+              <span style={{fontSize:"0.7rem"}}> + </span> Add Card
             </Button>
           </div>
         </div>

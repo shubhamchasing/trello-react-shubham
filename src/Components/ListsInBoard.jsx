@@ -3,28 +3,28 @@ import { connect } from "react-redux";
 
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import { AiOutlineMinusCircle } from "react-icons/ai";
 
 import CardsInList from "./CardsInLists";
 import * as TrelloApi from "./Api";
 import * as action from "../Redux/ActionCreator/ActionCreator";
-//import Delete from "../icons/sign-delete-svgrepo-com.svg";
 
 const mapStateToProps = (state) => {
   return {
     lists: state.lists,
   };
-};   
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
     getLists: (data) => dispatch(action.getLists(data)),
     addList: (data) => dispatch(action.addList(data)),
-    archiveList: (data) => dispatch(action.archiveList(data))
+    archiveList: (data) => dispatch(action.archiveList(data)),
   };
 };
 
 class List extends Component {
-  state = {  listName: "" };
+  state = { listName: "" };
 
   boardId = this.props.match.params.boardId;
 
@@ -33,18 +33,18 @@ class List extends Component {
   }
 
   handleDelete = async (e) => {
-    let archiveListId = e.target.value;
+    console.log(e.currentTarget.value);
+    let archiveListId = e.currentTarget.value;
     await TrelloApi.archiveList(archiveListId);
     let filteredLists = this.props.lists.filter((list) => {
       if (list.id !== archiveListId) {
         return true;
-      }
-      else{
+      } else {
         return false;
       }
     });
-    
-    this.props.archiveList(filteredLists)
+
+    this.props.archiveList(filteredLists);
   };
 
   handleChange = (e) => {
@@ -66,25 +66,47 @@ class List extends Component {
 
   render() {
     return (
-      <div className="list-container">
+      <div
+        className="list-container"
+        style={{
+          display: "flex",
+          alignItems: "flex-start",
+          backgroundColor: "#0079bf",
+          padding: "2rem",
+          minHeight: "100vh",
+           overflow:"auto"
+        }}
+      >
         {this.props.lists.map((list) => {
           return (
-            <Card className="lists" key={list.id} style={{paddingBottom:"20px"}}>
-              <Card.Header style={{display: "flex",justifyContent:"space-between", fontSize:"0.9rem", color:"gray" }}>{list.name} 
-              <Button
-                  variant="danger"
-                  type="submit"
+            <Card
+              className="lists"
+              key={list.id}
+              style={{ paddingBottom: "20px", backgroundColor: "#ebecf0" }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  padding: "0.5rem",
+                  fontWeight: "600",
+                }}
+              >
+                <span>{list.name}</span>
+                <button
                   value={list.id}
                   onClick={(e) => this.handleDelete(e)}
-                  style={{fontSize:"0.5rem", padding:"0px 10px", fontWeight:"900"}}
+                  style={{ border: "none", backgroundColor: "transparent" }}
                 >
-                </Button></Card.Header>
+                  <AiOutlineMinusCircle />
+                </button>
+              </div>
               <CardsInList listId={list.id} />
             </Card>
           );
         })}
         <Card className="add-list">
-          <Card.Header >{"Add another list"}</Card.Header>
+          <Card.Header>{"Add another list"}</Card.Header>
           <Card.Body>
             <input
               type="text"

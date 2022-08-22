@@ -60,13 +60,13 @@
 .remove-text-decoration {
   text-decoration: none;
 }
-
+/* 
 .list-container {
   display: flex;
   flex-wrap: wrap;
   margin: 2rem;
   gap: 2rem;
-}
+} */
 
 .lists {
   margin: 1rem;
@@ -99,10 +99,6 @@
   font-size: 0.75rem;
   margin: 0.8rem;
   width: 80%;
-}
-
-.mb-1{
-  width: 50%;
 }
 
 .item-container{
