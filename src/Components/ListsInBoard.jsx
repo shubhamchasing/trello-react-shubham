@@ -24,16 +24,15 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 class List extends Component {
-  state = { listName: "" };
+  state = { listName: "" }; 
 
   boardId = this.props.match.params.boardId;
 
   componentDidMount() {
     TrelloApi.getLists(this.boardId).then((data) => this.props.getLists(data));
   }
-
+    
   handleDelete = async (e) => {
-    console.log(e.currentTarget.value);
     let archiveListId = e.currentTarget.value;
     await TrelloApi.archiveList(archiveListId);
     let filteredLists = this.props.lists.filter((list) => {
@@ -66,63 +65,68 @@ class List extends Component {
 
   render() {
     return (
-      <div
-        className="list-container"
-        style={{
-          display: "flex",
-          alignItems: "flex-start",
-          backgroundColor: "#0079bf",
-          padding: "2rem",
-          minHeight: "100vh",
-           overflow:"auto"
-        }}
-      >
-        {this.props.lists.map((list) => {
-          return (
-            <Card
-              className="lists"
-              key={list.id}
-              style={{ paddingBottom: "20px", backgroundColor: "#ebecf0" }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  padding: "0.5rem",
-                  fontWeight: "600",
-                }}
-              >
-                <span>{list.name}</span>
-                <button
-                  value={list.id}
-                  onClick={(e) => this.handleDelete(e)}
-                  style={{ border: "none", backgroundColor: "transparent" }}
+      <>
+    
+      
+          <div
+            className="list-container"
+            style={{
+              display: "flex",
+              alignItems: "flex-start",
+              backgroundColor: "#0079bf",
+              padding: "2rem",
+              minHeight: "100vh",
+              overflow: "auto",
+            }}
+          >
+            {this.props.lists.map((list) => {
+              return (
+                <Card
+                  className="lists"
+                  key={list.id}
+                  style={{ paddingBottom: "20px", backgroundColor: "#ebecf0" }}
                 >
-                  <AiOutlineMinusCircle />
-                </button>
-              </div>
-              <CardsInList listId={list.id} />
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      padding: "0.5rem",
+                      fontWeight: "600",
+                    }}
+                  >
+                    <span>{list.name}</span>
+                    <button
+                      value={list.id}
+                      onClick={(e) => this.handleDelete(e)}
+                      style={{ border: "none", backgroundColor: "transparent" }}
+                    >
+                      <AiOutlineMinusCircle />
+                    </button>
+                  </div>
+                  <CardsInList listId={list.id} />
+                </Card>
+              );
+            })}
+            <Card className="add-list">
+              <Card.Header>{"Add another list"}</Card.Header>
+              <Card.Body>
+                <input
+                  type="text"
+                  placeholder="Enter list name"
+                  value={this.state.listName}
+                  onChange={this.handleChange}
+                  required
+                />
+                <br />
+                <br />
+                <Button onClick={this.handleSubmit} type="submit">
+                  Add List
+                </Button>
+              </Card.Body>
             </Card>
-          );
-        })}
-        <Card className="add-list">
-          <Card.Header>{"Add another list"}</Card.Header>
-          <Card.Body>
-            <input
-              type="text"
-              placeholder="Enter list name"
-              value={this.state.listName}
-              onChange={this.handleChange}
-              required
-            />
-            <br />
-            <br />
-            <Button onClick={this.handleSubmit} type="submit">
-              Add List
-            </Button>
-          </Card.Body>
-        </Card>
-      </div>
+          </div>
+
+      </>
     );
   }
 }

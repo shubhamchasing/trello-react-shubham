@@ -8,7 +8,7 @@ import List from "./Components/ListsInBoard";
 import PageNotFound from "./Components/PageNotFound";
 class App extends Component {
   render() {
-    return (<div style ={{}}>
+    return (
       <Router>
         <NavBar />
         <Switch>
@@ -16,7 +16,7 @@ class App extends Component {
           <Route path="/:boardId" component={List } />
           <Route path="*" component={PageNotFound}/>
         </Switch>
-      </Router></div>
+      </Router>
     );
   }
 }

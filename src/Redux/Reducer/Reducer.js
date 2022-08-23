@@ -3,6 +3,7 @@ import { ActionTypes } from "../Actions/Actions";
 const intialState = {
   boards: [],
   lists: [],
+  cardsInList: {},
 };
 
 export const boardsReducer = (state = intialState, action) => {
@@ -31,14 +32,43 @@ export const boardsReducer = (state = intialState, action) => {
         lists: [...state.lists, action.payload],
       };
 
-      case ActionTypes.ARCHIVE_LIST:
-        return {
-          ...state,
-          lists: action.payload,
-        };
+    case ActionTypes.ARCHIVE_LIST:
+      return {
+        ...state,
+        lists: action.payload,
+      };
+
+    case ActionTypes.GET_CARDS:
+      return {
+        ...state,
+        cardsInList: {
+          ...state.cardsInList,
+          [action.payload.listId]: action.payload.cards,
+        },
+      };
+  
+    case ActionTypes.ADD_CARD:
+      return {
+        ...state,
+        cardsInList: {
+          ...state.cardsInList,
+          [action.payload.listId]: [
+            ...state.cardsInList[action.payload.listId],
+            action.payload.card,
+          ],
+        },
+      };
+
+    case ActionTypes.DELETE_CARD:
+      return {
+        ...state,
+        cardsInList: {
+          ...state.cardsInList,
+          [action.payload.listId]: action.payload.remainingCards,
+        },
+      };
 
     default:
       return state;
   }
 };
- 

@@ -69,7 +69,7 @@ class Checklists extends Component {
             <Modal.Title>{this.cardName}</Modal.Title>
           </Modal.Header>
 
-          <Modal.Body>
+          <Modal.Body> 
             <InputGroup className="mb-1">
               <Form.Control
                 placeholder="Add new checklist"
