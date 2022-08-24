@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Form, Button, InputGroup } from "react-bootstrap";
+import { TiDeleteOutline } from "react-icons/ti";
+
 
 import * as TrelloApi from "./Api";
 
@@ -13,7 +15,7 @@ class Checkitems extends Component {
     TrelloApi.getCheckitems(this.checklistId).then((data) => {
       this.setState({ checkitems: data });
     });
-  }
+  } 
 
   handleChange(e) {
     this.setState({
@@ -34,7 +36,7 @@ class Checkitems extends Component {
   };
 
   handleDeleteCheckitem = (e) => {
-    let checkitemId = e.target.value;
+    let checkitemId = e.currentTarget.value;
     TrelloApi.deleteCheckitem(this.checklistId, checkitemId).then(() => {
       let filteredCheckitems = this.state.checkitems.filter((checkitem) => {
         if (checkitemId !== checkitem.id) {
@@ -76,12 +78,16 @@ class Checkitems extends Component {
             onChange={(e) => this.handleChange(e)}
             value={this.state.checkitemName}
             required
+            style={{fontSize:"0.7rem"}}
+
           />
           <Button
-            variant="outline-primary"
+            variant="outline-secondary"
             id="button-addon2"
             type="button"
             onClick={this.handleAddCheckitem}
+            style={{fontSize:"0.7rem"}}
+            size="sm"
           >
             Add item
           </Button>
@@ -91,10 +97,13 @@ class Checkitems extends Component {
           this.state.checkitems.map((checkitem) => {
             let status = checkitem.state === "complete" ? true : false;
             return (
+              <>
               <Form.Group
                 className="mb-3 item-container"
                 controlId="formBasicCheckbox"
                 key={checkitem.id}
+                style={{display:"flex" , alignItems:"center", justifyContent:"space-between"}}
+
               >
                 <Form.Check
                   type="checkbox"
@@ -103,17 +112,18 @@ class Checkitems extends Component {
                   value={checkitem.id}
                   onChange={(e) => this.handleUpdateCheckitem(e)}
                 />
-                <Button
-                  variant="outline-danger"
-                  id="button-addon2"
+                <button
                   type="button"
                   value={checkitem.id}
                   onClick={(e) => this.handleDeleteCheckitem(e)}
-                  size="sm"
+                  style={{ border: "none", backgroundColor: "transparent" }}
+
                 >
-                  Delete
-                </Button>
+                  <TiDeleteOutline color="red"/>
+                </button>
               </Form.Group>
+              <hr/>
+              </>
             );
           })}
       </Form>

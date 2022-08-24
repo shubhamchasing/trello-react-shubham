@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Card, Button, Modal, Form, InputGroup } from "react-bootstrap";
+import { MdDeleteOutline } from "react-icons/md";
+
 
 import * as TrelloApi from "./Api";
 import Checkitems from "./Checkitems";
@@ -42,7 +44,7 @@ class Checklists extends Component {
   };
 
   handleDeleteChecklist = (e) => {
-    let checklistId = e.target.value;
+    let checklistId = e.currentTarget.value;
     TrelloApi.deleteChecklist(checklistId).then(() => {
       let filteredChecklists = this.state.checklists.filter((checklist) => {
         if (checklistId !== checklist.id) {
@@ -59,18 +61,18 @@ class Checklists extends Component {
   render() {
     return (
       <>
-        <Button variant="primary" onClick={this.handleViewCard}
-         style={{fontSize:"0.5rem", padding:"5px 10px", fontWeight:"900", marginRight:"35%"}} >
+        <button  onClick={this.handleViewCard}
+         style={{fontSize:"0.5rem", fontWeight:"500",backgroundColor:"transparent",border:"none", color:"#6c757d"}} >
           View Card
-        </Button>
+        </button>
 
-        <Modal show={this.state.modal} onHide={this.handleModal} size="lg">
+        <Modal show={this.state.modal} onHide={this.handleModal} >
           <Modal.Header closeButton>
-            <Modal.Title>{this.cardName}</Modal.Title>
+            {this.cardName}
           </Modal.Header>
 
           <Modal.Body> 
-            <InputGroup className="mb-1">
+            <InputGroup className="mb-4">
               <Form.Control
                 placeholder="Add new checklist"
                 aria-label="Add new checklist"
@@ -78,31 +80,37 @@ class Checklists extends Component {
                 onChange={(e) => this.handleChange(e)}
                 value={this.state.checklistName}
                 required
+                style={{fontSize:"0.7rem"}}
               />
               <Button
-                variant="primary"
+                variant="outline-primary"
                 id="button-addon2"
                 type="button"
+                size="sm"
                 onClick={this.handleAddChecklist}
+                style={{fontSize:"0.7rem"}}
               >
                 Add checklist
               </Button>
             </InputGroup>
             {this.state.checklists.map((checklist) => {
               return (
-                <Card key={checklist.id}>
-                  <Card.Header className="card-header">
+                <Card key={checklist.id} >
+                  <Card.Header className="card-header" style={{fontSize:"1rem",display:"flex",alignItems:"center" , justifyContent:"space-between" ,padding:"0.1rem 0.5rem"}}>
                     {checklist.name}
-                    <Button
-                      variant="secondary"
+                    <button
                       type="button"
                       value={checklist.id}
                       onClick={(e) => this.handleDeleteChecklist(e)}
+                      style={{ border: "none", backgroundColor: "transparent" }}
+
                     >
-                      Delete checklist
-                    </Button>
+                      <MdDeleteOutline color="red"/>
+                    </button>
                   </Card.Header>
-                 <Checkitems checklistId = {checklist.id} cardId ={this.cardId}/>
+               <div style={{padding:"1rem"}}>
+               <Checkitems checklistId = {checklist.id} cardId ={this.cardId}/>
+               </div>
                 </Card>
               );
             })}

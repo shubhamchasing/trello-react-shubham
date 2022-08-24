@@ -80,17 +80,22 @@ class CardsInList extends Component {
           {this.props.cards[this.props.listId] === undefined
             ? null
             : this.props.cards[this.props.listId].map((card) => (
-                <div key={card.id} className="card-container">
+                <div key={card.id} className="card-container" style={{margin:"1rem" }}>
                   <div
                     style={{
                       backgroundColor: "white",
                       display: "flex",
                       justifyContent: "space-between",
-                      padding: "0.5rem",
+                      alignItems:"center",
+                      padding: "0rem 0.5rem",
                       fontWeight: "400",
+                      borderRadius:"5px"
+                      ,boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
+                      
+                      
                     }}
                   >
-                    <span>{card.name}</span>
+                    <span style={{fontSize:"0.7rem", color:"gray"}}>{card.name}</span>
                     <button
                       onClick={(e) => this.handleDelete(e)}
                       value={card.id}

@@ -19,17 +19,7 @@ function NavBar() {
         </Link>
 
 
-        <Form className="d-flex">
-          <Form.Control
-            type="search"
-            placeholder="Search"
-            className="me-2"
-            aria-label="Search"
-          />
-          <Button variant="outline-success" style={{ color: "white" }}>
-            Search
-          </Button>
-        </Form>
+        
       </Container>
     </Navbar>
   );

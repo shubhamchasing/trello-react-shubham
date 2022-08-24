@@ -107,7 +107,7 @@ class List extends Component {
                       onClick={(e) => this.handleDelete(e)}
                       style={{ border: "none", backgroundColor: "transparent" }}
                     >
-                      <AiOutlineMinusCircle />
+                      <AiOutlineMinusCircle color="red"/>
                     </button>
                   </span>
                 </div>
