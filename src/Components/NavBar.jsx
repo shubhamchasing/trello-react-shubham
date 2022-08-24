@@ -19,7 +19,7 @@ function NavBar() {
         </Link>
 
 
-        
+      
       </Container>
     </Navbar>
   );

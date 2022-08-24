@@ -95,7 +95,7 @@ class Checklists extends Component {
             </InputGroup>
             {this.state.checklists.map((checklist) => {
               return (
-                <Card key={checklist.id} >
+                <Card key={checklist.id} style={{ margin:"1rem"}} >
                   <Card.Header className="card-header" style={{fontSize:"1rem",display:"flex",alignItems:"center" , justifyContent:"space-between" ,padding:"0.1rem 0.5rem"}}>
                     {checklist.name}
                     <button
