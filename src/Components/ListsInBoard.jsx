@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { AiOutlineMinusCircle } from "react-icons/ai";
+import { BiPlus } from "react-icons/bi";
 
 import CardsInList from "./CardsInLists";
 import * as TrelloApi from "./Api";
@@ -24,14 +25,14 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 class List extends Component {
-  state = { listName: "" }; 
+  state = { listName: "" };
 
   boardId = this.props.match.params.boardId;
 
   componentDidMount() {
     TrelloApi.getLists(this.boardId).then((data) => this.props.getLists(data));
   }
-    
+
   handleDelete = async (e) => {
     let archiveListId = e.currentTarget.value;
     await TrelloApi.archiveList(archiveListId);
@@ -66,35 +67,41 @@ class List extends Component {
   render() {
     return (
       <>
-    
-      
-          <div
-            className="list-container"
-            style={{
-              display: "flex",
-              alignItems: "flex-start",
-              backgroundColor: "#0079bf",
-              padding: "2rem",
-              minHeight: "100vh",
-              overflow: "auto",
-            }}
-          >
-            {this.props.lists.map((list) => {
-              return (
-                <Card
-                  className="lists"
-                  key={list.id}
-                  style={{ paddingBottom: "20px", backgroundColor: "#ebecf0" }}
+        <div
+          className="list-container"
+          style={{
+            display: "flex",
+            alignItems: "flex-start",
+            backgroundColor: "#0079bf",
+            padding: "2rem",
+            minHeight: "90vh",
+            Width: "100%",
+            overflowX: "auto",
+          }}
+        >
+          {this.props.lists.map((list) => {
+            return (
+              <Card
+                className="lists"
+                key={list.id}
+                style={{
+                  paddingBottom: "20px",
+                  backgroundColor: "#ebecf0",
+                  margin: "0.25rem",
+                  minWidth: "330px",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    padding: "0.5rem",
+                    fontWeight: "600",
+                  }}
                 >
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      padding: "0.5rem",
-                      fontWeight: "600",
-                    }}
-                  >
-                    <span>{list.name}</span>
+                  <span style={{ width:"100%", display:"flex" , justifyContent:"space-between" ,margin:"0.3rem"}}>
+                    {list.name}
+
                     <button
                       value={list.id}
                       onClick={(e) => this.handleDelete(e)}
@@ -102,30 +109,51 @@ class List extends Component {
                     >
                       <AiOutlineMinusCircle />
                     </button>
-                  </div>
-                  <CardsInList listId={list.id} />
-                </Card>
-              );
-            })}
-            <Card className="add-list">
-              <Card.Header>{"Add another list"}</Card.Header>
-              <Card.Body>
-                <input
-                  type="text"
-                  placeholder="Enter list name"
-                  value={this.state.listName}
-                  onChange={this.handleChange}
-                  required
-                />
-                <br />
-                <br />
-                <Button onClick={this.handleSubmit} type="submit">
-                  Add List
-                </Button>
-              </Card.Body>
-            </Card>
-          </div>
+                  </span>
+                </div>
+                <CardsInList listId={list.id} />
+              </Card>
+            );
+          })}
+          <Card
+            className="add-list"
+            style={{
+              paddingBottom: "20px",
+              backgroundColor: "#4897cd",
+              margin: "0.25rem",
+              minWidth: "330px",
+              maxWidth: "330px",
+              color: "white",
+            }}
+          >
+            <span style={{ marginLeft: "0.8rem", marginTop: "0.5rem" }}>
+              {" "}
+              <BiPlus /> {"Add another list"}
+            </span>
 
+            <input
+              className="add-list"
+              type="text"
+              placeholder="Enter list name"
+              value={this.state.listName}
+              onChange={this.handleChange}
+              required={true}
+            />
+            <Button
+              onClick={this.handleSubmit}
+              variant="outline-light"
+              type="button"
+              style={{
+                marginLeft: "15px",
+                fontSize: "0.65rem",
+                fontWeight: "700",
+                width: "5rem",
+              }}
+            >
+              <span style={{ fontSize: "0.7rem" }}> + </span> Add List
+            </Button>
+          </Card>
+        </div>
       </>
     );
   }

@@ -68,24 +68,19 @@
   gap: 2rem;
 } */
 
-.lists {
-  margin: 1rem;
-  width: 330px;
-}
-
 .main-container{
     display: flex;
     flex-direction: column;
 }
 
-.card-container {
+/* .card-container {
   display: flex;
   flex-direction: column;
   margin: 1rem;
   border-radius: 0.5rem;
-  background-color: rgba(211, 211, 211, 0.548);
   padding: 15px;
-}
+} */
+
 
 .buttons {
   display: flex;
@@ -93,12 +88,24 @@
   flex-direction: row;
   padding: 1rem;
 }
-
 .add-card {
-  padding: 0.25rem;
+  padding: 0.25rem 0.5rem; 
   font-size: 0.75rem;
   margin: 0.8rem;
   width: 80%;
+  border:0px;
+  border-radius: 5px;
+  outline: none;
+}
+
+.add-list {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  margin: 0.8rem;
+  width: 80%;
+  border:0px;
+  border-radius: 5px;
+  outline: none;
 }
 
 .item-container{

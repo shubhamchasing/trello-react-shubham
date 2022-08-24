@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Button } from "react-bootstrap";
+import { MdDeleteOutline } from "react-icons/md";
 
 import * as TrelloApi from "./Api";
 import Checklists from "./Checklists";
 import * as action from "../Redux/ActionCreator/ActionCreator";
 
 const mapStateToProps = (state) => {
-  console.log(state.cardsInList)
+  console.log(state.cardsInList);
   return {
     cards: state.cardsInList,
   };
@@ -25,7 +26,7 @@ class CardsInList extends Component {
   state = {
     cardName: "",
   };
-   
+
   componentDidMount() {
     TrelloApi.getCards(this.props.listId).then((data) => {
       this.props.getCards({
@@ -41,11 +42,11 @@ class CardsInList extends Component {
       cardName,
     });
   };
- 
+
   handleOnClick = () => {
     let listId = this.props.listId;
     TrelloApi.addCard(this.state.cardName, listId).then((data) => {
-      console.log("data",data)
+      console.log("data", data);
       this.setState({ cardName: "" });
 
       this.props.addCard({
@@ -53,11 +54,10 @@ class CardsInList extends Component {
         listId,
       });
     });
-
   };
 
   handleDelete = async (e) => {
-    let cardId = e.target.value;
+    let cardId = e.currentTarget.value;
     await TrelloApi.deleteCard(cardId);
     let filteredCards = this.props.cards[this.props.listId].filter((card) => {
       if (card.id !== cardId) {
@@ -69,75 +69,63 @@ class CardsInList extends Component {
     this.props.deleteCard({
       remainingCards: filteredCards,
       listId: this.props.listId,
-    }); 
-  };  
-  
- 
+    });
+  };
+
   render() {
- 
-    return ( 
+    return (
       <>
-      
-          <div className="main-container">
-            {" "}
-            { this.props.cards[this.props.listId] === undefined? null : this.props.cards[this.props.listId].map((card) => (
-              <div key={card.id} className="card-container">
-                <div>
-                   <p
+        <div className="main-container">
+          {" "}
+          {this.props.cards[this.props.listId] === undefined
+            ? null
+            : this.props.cards[this.props.listId].map((card) => (
+                <div key={card.id} className="card-container">
+                  <div
                     style={{
-                      fontSize: "0.9rem",
-                      fontWeight: "500",
-                      marginBottom: "5px",
+                      backgroundColor: "white",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      padding: "0.5rem",
+                      fontWeight: "400",
                     }}
                   >
-                    {card.name}
-                  </p>
-                  <hr style={{ marginTop: "0px" }} />
-                </div>
-                <div className="buttons">
+                    <span>{card.name}</span>
+                    <button
+                      onClick={(e) => this.handleDelete(e)}
+                      value={card.id}
+                      type="button"
+                      style={{ border: "none", backgroundColor: "transparent" }}
+                    >
+                      <MdDeleteOutline color="red" />
+                    </button>
+                  </div>
                   <Checklists key={card.id} card={card} />
-                  <Button
-                    onClick={(e) => this.handleDelete(e)}
-                    value={card.id}
-                    type="button"
-                    variant="danger"
-                    size="sm"
-                    style={{
-                      fontSize: "0.5rem",
-                      padding: "5px 10px",
-                      fontWeight: "900",
-                    }}
-                  >
-                    Delete Card
-                  </Button>
                 </div>
-              </div>
-            ))}
-            <div>
-              <input
-                className="add-card"
-                placeholder="Enter card name"
-                value={this.state.cardName}
-                onChange={this.handleChange}
-                type="text"
-                required
-              />
-              <Button
-                active={false}
-                variant="outline-secondary"
-                onClick={(e) => this.handleOnClick(e)}
-                type="button"
-                style={{
-                  marginLeft: "15px",
-                  fontSize: "0.65rem",
-                  fontWeight: "700",
-                }}
-              >
-                <span style={{ fontSize: "0.7rem" }}> + </span> Add Card
-              </Button>
-            </div>
+              ))}
+          <div>
+            <input
+              className="add-card"
+              placeholder="Enter card name"
+              value={this.state.cardName}
+              onChange={this.handleChange}
+              type="text"
+              required={true}
+            />
+            <Button
+              variant="outline-secondary"
+              onClick={(e) => this.handleOnClick(e)}
+              type="button"
+              style={{
+                marginLeft: "15px",
+                fontSize: "0.65rem",
+                fontWeight: "700",
+              }}
+            >
+              <span style={{ fontSize: "0.7rem" }}> + </span> Add Card
+            </Button>
           </div>
-        
+        </div>
       </>
     );
   }

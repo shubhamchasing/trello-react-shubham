@@ -6,11 +6,11 @@ import Navbar from "react-bootstrap/Navbar";
 
 function NavBar() {
   return (
-    <Navbar className="navbar" size ="sm" style={{height:"10%"}}>
+    <Navbar className="navbar" size ="sm" style={{height:"10vh"}}>
       <Container fluid>
         <img className="trello-logo"
           src={
-            "https://seeklogo.com/images/T/trello-logo-45ABCC6452-seeklogo.com.png"
+            "https://a.trellocdn.com/prgb/dist/images/header-logo-spirit.d947df93bc055849898e.gif"
           }
           alt=""
         />
