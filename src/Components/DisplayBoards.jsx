@@ -93,25 +93,27 @@ class DisplayBoards extends Component {
         </Modal>
 
         <div className="boards-container">
-          <div className=" d-flex flex-wrap ">
-            <div className={this.state.spinner ? "trello-spinner" : "d-none"}>
+          {this.state.spinner ? (
+            <div className="d-flex justify-content-center">
               <Spinner animation="border" />
             </div>
-
-            {this.props.boards.map((board) => {
-              return <Board key={board.id} board={board} />;
-            })}
-            <div
-              onClick={this.handleModal}
-              className={
-                !this.state.spinner
-                  ? "boards-create-board d-flex flex-column justify-content-center align-items-center"
-                  : "d-none"
-              }
-            >
-              Create new board
+          ) : (
+            <div className=" d-flex flex-wrap ">
+              {this.props.boards.map((board) => {
+                return <Board key={board.id} board={board} />;
+              })}
+              <div
+                onClick={this.handleModal}
+                className={
+                  !this.state.spinner
+                    ? "boards-create-board d-flex flex-column justify-content-center align-items-center"
+                    : "d-none"
+                }
+              >
+                Create new board
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </>
     );
