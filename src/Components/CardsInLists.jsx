@@ -10,7 +10,6 @@ import Checklists from "./Checklists";
 import * as action from "../Redux/ActionCreator/ActionCreator";
 
 const mapStateToProps = (state) => {
-  console.log(state.cardsInList);
   return {
     cards: state.cardsInList,
   };
@@ -48,7 +47,6 @@ class CardsInList extends Component {
   handleOnClick = () => {
     let listId = this.props.listId;
     TrelloApi.addCard(this.state.cardName, listId).then((data) => {
-      console.log("data", data);
       this.setState({ cardName: "" });
 
       this.props.addCard({

@@ -54,7 +54,6 @@ class Checkitems extends Component {
     let checkitemId = e.target.value;
     let state = e.target.checked === true ? "complete" : "incomplete";
     TrelloApi.updateCheckitem(this.cardId, checkitemId, state).then((data) => {
-      console.log(data);
       let filteredCheckitems = this.state.checkitems.filter((checkitem) => {
         if (checkitemId !== checkitem.id) {
           return true;
