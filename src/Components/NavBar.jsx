@@ -1,12 +1,11 @@
 import { Link } from "react-router-dom";
-import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
+
 import Navbar from "react-bootstrap/Navbar";
+import Container from "react-bootstrap/Container";
 
 function NavBar() {
   return (
-    <Navbar className="navbar" size ="sm" style={{height:"10vh"}}>
+    <Navbar className="navbar" size="sm" style={{ height: "10vh" }}>
       <Container fluid>
         <Link className="navbar-home" to="/">
           <img

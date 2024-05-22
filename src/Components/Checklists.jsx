@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Card, Button, Modal, Form, InputGroup } from "react-bootstrap";
-import { MdDeleteOutline } from "react-icons/md";
 
+import { Button, Card, Form, InputGroup, Modal } from "react-bootstrap";
+
+import { MdDeleteOutline } from "react-icons/md";
 
 import * as TrelloApi from "./Api";
 import Checkitems from "./Checkitems";
@@ -49,8 +50,7 @@ class Checklists extends Component {
       let filteredChecklists = this.state.checklists.filter((checklist) => {
         if (checklistId !== checklist.id) {
           return true;
-        }
-        else{
+        } else {
           return false;
         }
       });
@@ -61,17 +61,23 @@ class Checklists extends Component {
   render() {
     return (
       <>
-        <button  onClick={this.handleViewCard}
-         style={{fontSize:"0.5rem", fontWeight:"500",backgroundColor:"transparent",border:"none", color:"#6c757d"}} >
+        <button
+          onClick={this.handleViewCard}
+          style={{
+            fontSize: "0.5rem",
+            fontWeight: "500",
+            backgroundColor: "transparent",
+            border: "none",
+            color: "#6c757d",
+          }}
+        >
           View Card
         </button>
 
-        <Modal show={this.state.modal} onHide={this.handleModal} >
-          <Modal.Header closeButton>
-            {this.cardName}
-          </Modal.Header>
+        <Modal show={this.state.modal} onHide={this.handleModal}>
+          <Modal.Header closeButton>{this.cardName}</Modal.Header>
 
-          <Modal.Body> 
+          <Modal.Body>
             <InputGroup className="mb-4">
               <Form.Control
                 placeholder="Add new checklist"
@@ -80,7 +86,7 @@ class Checklists extends Component {
                 onChange={(e) => this.handleChange(e)}
                 value={this.state.checklistName}
                 required
-                style={{fontSize:"0.7rem"}}
+                style={{ fontSize: "0.7rem" }}
               />
               <Button
                 variant="outline-primary"
@@ -88,29 +94,40 @@ class Checklists extends Component {
                 type="button"
                 size="sm"
                 onClick={this.handleAddChecklist}
-                style={{fontSize:"0.7rem"}}
+                style={{ fontSize: "0.7rem" }}
               >
                 Add checklist
               </Button>
             </InputGroup>
             {this.state.checklists.map((checklist) => {
               return (
-                <Card key={checklist.id} style={{ margin:"1rem"}} >
-                  <Card.Header className="card-header" style={{fontSize:"1rem",display:"flex",alignItems:"center" , justifyContent:"space-between" ,padding:"0.1rem 0.5rem"}}>
+                <Card key={checklist.id} style={{ margin: "1rem" }}>
+                  <Card.Header
+                    className="card-header"
+                    style={{
+                      fontSize: "1rem",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      padding: "0.1rem 0.5rem",
+                    }}
+                  >
                     {checklist.name}
                     <button
                       type="button"
                       value={checklist.id}
                       onClick={(e) => this.handleDeleteChecklist(e)}
                       style={{ border: "none", backgroundColor: "transparent" }}
-
                     >
-                      <MdDeleteOutline color="red"/>
+                      <MdDeleteOutline color="red" />
                     </button>
                   </Card.Header>
-               <div style={{padding:"1rem"}}>
-               <Checkitems checklistId = {checklist.id} cardId ={this.cardId}/>
-               </div>
+                  <div style={{ padding: "1rem" }}>
+                    <Checkitems
+                      checklistId={checklist.id}
+                      cardId={this.cardId}
+                    />
+                  </div>
                 </Card>
               );
             })}

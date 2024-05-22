@@ -46,7 +46,7 @@ export const boardsReducer = (state = intialState, action) => {
           [action.payload.listId]: action.payload.cards,
         },
       };
-  
+
     case ActionTypes.ADD_CARD:
       return {
         ...state,

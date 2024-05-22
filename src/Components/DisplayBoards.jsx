@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { Modal, Spinner } from "react-bootstrap";
+
 import { connect } from "react-redux";
+import { Modal, Spinner } from "react-bootstrap";
 
 import Board from "./Board";
 import * as TrelloApi from "./Api";
-import * as action from "../Redux/ActionCreator/ActionCreator"
+import * as action from "../Redux/ActionCreator/ActionCreator";
 
 const mapStateToProps = (state) => {
   return {
@@ -14,18 +15,18 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getBoards : (data) => dispatch( action.getBoards(data) ),
-    createBoard : (data) => dispatch(action.createBoard(data))
-  }
+    getBoards: (data) => dispatch(action.getBoards(data)),
+    createBoard: (data) => dispatch(action.createBoard(data)),
+  };
 };
 
 class DisplayBoards extends Component {
-  state = {modal: false, boardTitle: "", spinner: true };
+  state = { modal: false, boardTitle: "", spinner: true };
 
   componentDidMount() {
     TrelloApi.getBoards().then((data) => {
-      this.setState({spinner: false })
-      this.props.getBoards(data)
+      this.setState({ spinner: false });
+      this.props.getBoards(data);
     });
   }
 
@@ -41,7 +42,7 @@ class DisplayBoards extends Component {
         modal: !this.state.modal,
         boardTitle: "",
       });
-      this.props.createBoard(data)
+      this.props.createBoard(data);
     });
   };
 
@@ -59,7 +60,9 @@ class DisplayBoards extends Component {
     return (
       <>
         <Modal show={this.state.modal} onHide={this.handleModal}>
-        <Modal.Header closeButton> <Modal.Title>{"Create New Board"}</Modal.Title>
+          <Modal.Header closeButton>
+            {" "}
+            <Modal.Title>{"Create New Board"}</Modal.Title>
           </Modal.Header>
           <form
             className="create-board"
@@ -120,4 +123,4 @@ class DisplayBoards extends Component {
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(DisplayBoards);
+export default connect(mapStateToProps, mapDispatchToProps)(DisplayBoards);

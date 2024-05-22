@@ -43,7 +43,6 @@ export const getCards = ({ cards, listId }) => {
 };
 
 export const addCard = ({ card, listId }) => {
-  console.log("action", card,listId)
   return {
     type: ActionTypes.ADD_CARD,
     payload: { card, listId },

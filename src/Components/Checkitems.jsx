@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Form, Button, InputGroup } from "react-bootstrap";
-import { TiDeleteOutline } from "react-icons/ti";
 
+import { Button, Form, InputGroup } from "react-bootstrap";
+
+import { TiDeleteOutline } from "react-icons/ti";
 
 import * as TrelloApi from "./Api";
 
@@ -15,7 +16,7 @@ class Checkitems extends Component {
     TrelloApi.getCheckitems(this.checklistId).then((data) => {
       this.setState({ checkitems: data });
     });
-  } 
+  }
 
   handleChange(e) {
     this.setState({
@@ -41,8 +42,7 @@ class Checkitems extends Component {
       let filteredCheckitems = this.state.checkitems.filter((checkitem) => {
         if (checkitemId !== checkitem.id) {
           return true;
-        }
-        else{
+        } else {
           return false;
         }
       });
@@ -58,8 +58,7 @@ class Checkitems extends Component {
       let filteredCheckitems = this.state.checkitems.filter((checkitem) => {
         if (checkitemId !== checkitem.id) {
           return true;
-        }
-        else{
+        } else {
           return false;
         }
       });
@@ -78,15 +77,14 @@ class Checkitems extends Component {
             onChange={(e) => this.handleChange(e)}
             value={this.state.checkitemName}
             required
-            style={{fontSize:"0.7rem"}}
-
+            style={{ fontSize: "0.7rem" }}
           />
           <Button
             variant="outline-secondary"
             id="button-addon2"
             type="button"
             onClick={this.handleAddCheckitem}
-            style={{fontSize:"0.7rem"}}
+            style={{ fontSize: "0.7rem" }}
             size="sm"
           >
             Add item
@@ -98,31 +96,33 @@ class Checkitems extends Component {
             let status = checkitem.state === "complete" ? true : false;
             return (
               <>
-              <Form.Group
-                className="mb-3 item-container"
-                controlId="formBasicCheckbox"
-                key={checkitem.id}
-                style={{display:"flex" , alignItems:"center", justifyContent:"space-between"}}
-
-              >
-                <Form.Check
-                  type="checkbox"
-                  label={checkitem.name}
-                  checked={status}
-                  value={checkitem.id}
-                  onChange={(e) => this.handleUpdateCheckitem(e)}
-                />
-                <button
-                  type="button"
-                  value={checkitem.id}
-                  onClick={(e) => this.handleDeleteCheckitem(e)}
-                  style={{ border: "none", backgroundColor: "transparent" }}
-
+                <Form.Group
+                  className="mb-3 item-container"
+                  controlId="formBasicCheckbox"
+                  key={checkitem.id}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
                 >
-                  <TiDeleteOutline color="red"/>
-                </button>
-              </Form.Group>
-              <hr/>
+                  <Form.Check
+                    type="checkbox"
+                    label={checkitem.name}
+                    checked={status}
+                    value={checkitem.id}
+                    onChange={(e) => this.handleUpdateCheckitem(e)}
+                  />
+                  <button
+                    type="button"
+                    value={checkitem.id}
+                    onClick={(e) => this.handleDeleteCheckitem(e)}
+                    style={{ border: "none", backgroundColor: "transparent" }}
+                  >
+                    <TiDeleteOutline color="red" />
+                  </button>
+                </Form.Group>
+                <hr />
               </>
             );
           })}

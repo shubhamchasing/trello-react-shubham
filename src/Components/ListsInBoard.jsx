@@ -1,13 +1,14 @@
 import React, { Component } from "react";
+
 import { connect } from "react-redux";
 
-import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import { AiOutlineMinusCircle } from "react-icons/ai";
 import { BiPlus } from "react-icons/bi";
+import Button from "react-bootstrap/Button";
+import { AiOutlineMinusCircle } from "react-icons/ai";
 
-import CardsInList from "./CardsInLists";
 import * as TrelloApi from "./Api";
+import CardsInList from "./CardsInLists";
 import * as action from "../Redux/ActionCreator/ActionCreator";
 
 const mapStateToProps = (state) => {
@@ -99,7 +100,14 @@ class List extends Component {
                     fontWeight: "600",
                   }}
                 >
-                  <span style={{ width:"100%", display:"flex" , justifyContent:"space-between" ,margin:"0.3rem"}}>
+                  <span
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      margin: "0.3rem",
+                    }}
+                  >
                     {list.name}
 
                     <button
@@ -107,7 +115,7 @@ class List extends Component {
                       onClick={(e) => this.handleDelete(e)}
                       style={{ border: "none", backgroundColor: "transparent" }}
                     >
-                      <AiOutlineMinusCircle color="red"/>
+                      <AiOutlineMinusCircle color="red" />
                     </button>
                   </span>
                 </div>

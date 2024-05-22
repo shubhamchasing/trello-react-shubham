@@ -134,17 +134,15 @@ function deleteCheckitem(id, idCheckItem) {
     .catch((err) => console.error(err));
 }
 
-function updateCheckitem(idCard,idCheckItem,state) {
+function updateCheckitem(idCard, idCheckItem, state) {
   return axios
-    .put(
-      `/1/cards/${idCard}/checkItem/${idCheckItem}`,null,{
-        params: {
-          state
-        }
-      }
-    )
+    .put(`/1/cards/${idCard}/checkItem/${idCheckItem}`, null, {
+      params: {
+        state,
+      },
+    })
     .then((res) => res.data)
-    .catch((err) => console.error(err))
+    .catch((err) => console.error(err));
 }
 
 export {
@@ -162,5 +160,5 @@ export {
   getCheckitems,
   addCheckitem,
   deleteCheckitem,
-  updateCheckitem
+  updateCheckitem,
 };
